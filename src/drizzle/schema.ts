@@ -29,7 +29,9 @@ export const menuItemTable = pgTable("menu_item", {
 export const cityTable = pgTable("city", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 256 }),
-  state_id: integer("state_id").references(() => stateTable.id),
+  state_id: integer("state_id").references(() => stateTable.id, {
+    onDelete: "cascade",
+  }),
 });
 
 export const stateTable = pgTable("state", {
@@ -139,8 +141,6 @@ export const usersTable = pgTable("users", {
   email_verified: boolean("email_verified"),
   confirmation_code: varchar("confirmation_code", { length: 256 }),
   password: varchar("password", { length: 256 }),
-  created_at: date("created_at"),
-  updated_at: date("created_at"),
 });
 
 export const restaurantOwnerTable = pgTable("restaurant_owner", {
@@ -152,10 +152,6 @@ export const restaurantOwnerTable = pgTable("restaurant_owner", {
 //TABLE TYPES
 export type TIUser = typeof usersTable.$inferInsert;
 export type TSUser = typeof usersTable.$inferSelect;
-
-
-
-
 
 // relationships
 

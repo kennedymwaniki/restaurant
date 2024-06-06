@@ -14,5 +14,4 @@ stateRouter.get("/state", listState);
 stateRouter.post("/state", createState);
 stateRouter.delete("/state/:id", deleteState);
 stateRouter.get("/state/:id", getState);
-stateRouter.put('/state')
-
+stateRouter.put("/state/:id", updateState);

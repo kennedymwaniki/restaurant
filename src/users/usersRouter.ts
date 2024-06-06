@@ -19,5 +19,5 @@ userRouter.put("/users/:id", updateUser)
 userRouter.delete("/users/:id", deleteUser)
 
 //delete user
-userRouter.post("/users", deleteUser);
+userRouter.post("/users/:id", deleteUser);
 // userRouter.put("/users/:id", updateUser);

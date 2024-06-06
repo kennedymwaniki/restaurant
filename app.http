@@ -1,18 +1,38 @@
 GET http://localhost:8000/api/users
 
 ###
+GET http://localhost:8000/api/users/2
 
-
-GET http://localhost:8000/api/news
 
 ###
-Get http://localhost:8000/api/users
+POST http://localhost:8000/api/users
+Content-Type: application/json
+
+{
+    "name": "leroy",
+    "contact_phone": "12345666",
+    "phone_verified": true,
+    "email": "lee@gmail.com",
+    "email_verified": true,
+    "confirmation_code": "223",
+    "password": "2222"
+}
 
 ###
-GET http://localhost:8000/api/cities
+DELETE  http://localhost:8000/api/users/13
 
+
+
+///state
 ###
 GET http://localhost:8000/api/state
+
+###
+DELETE http://localhost:8000/api/state/15
+
+###
+
+PUT http://localhost:8000/api/state/15
 
 ###
 //update
@@ -31,7 +51,6 @@ Content-Type: application/json
 
 
 ###
-DELETE  http://localhost:8000/api/users/1
 
 
 
@@ -43,14 +62,60 @@ GET http://localhost:8000/api/state
 
 ###
 
-POST http://localhost:8000/api/state
+PUT http://localhost:8000/api/state/13
 Content-Type: application/json
 
 {
    
-   "name": "kitatina",
-   "code" : "KT"
+   "name": "kutus",
+   "code" : "Kg"
 
 
 }
+###
+
+POST http://localHost/api/state
+Content-Type: application/json
+
+{
+   "name": "maina",
+   "code": "mn"
+
+}
+
+###
+DELETE http://localhost:8000/api/state/2
+
+
+
+//city
+###
+GET http://localhost:8000/api/cities/8
+###
+DELETE http://localhost:8000/api/cities/6
+
+###
+ GET http://localhost:8000/api/cities
+
+###
+ POST http://localhost:8000/api/cities
+Content-Type: application/json
+
+{
+   "name": "maina",
+    "state_id" : 1
+
+}
+
+###
+PUT http://localhost:8000/api/cities/6
+Content-Type: application/json
+
+{
+   "name": "maina",
+    "state_id" : 1
+
+}
+
+
 
