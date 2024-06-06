@@ -1,0 +1,9 @@
+GET http://localhost:8000/api/users
+
+###
+
+
+GET http://localhost:8000/api/news
+
+###
+Get http://localhost:8000/api/users/1
