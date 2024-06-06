@@ -36,4 +36,21 @@ DELETE  http://localhost:8000/api/users/1
 
 
 
+
 //state
+###
+GET http://localhost:8000/api/state
+
+###
+
+POST http://localhost:8000/api/state
+Content-Type: application/json
+
+{
+   
+   "name": "kitatina",
+   "code" : "KT"
+
+
+}
+

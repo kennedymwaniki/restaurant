@@ -18,6 +18,7 @@ app.get("/news", (c) => {
 app.route("/", userRouter);
 app.route("/", cityRouter);
 app.route("/", stateRouter);
+
 // example
 
 const port = 3000;
