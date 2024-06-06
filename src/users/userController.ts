@@ -1,6 +1,14 @@
 import { Hono } from "hono";
 import { type Context } from "hono";
 
+import {
+  createUserService,
+  getUserService,
+  usersService,
+  updateUserService,
+  deleteUserService,
+} from "./userServices";
+
 const users = [
   { id: 1, name: "John Doe", email: "john@example.com" },
   { id: 2, name: "Jane Doe", email: "jane@example.com" },
@@ -11,7 +19,8 @@ const users = [
 
 // get all users
 export const listUsers = async (c: Context) => {
-  return c.json(users);
+  const data = await usersService();
+  return c.json(data);
 };
 
 //get one user
@@ -26,23 +35,56 @@ export const getUser = (c: Context) => {
 };
 
 // create a new user
-export const newUser = async (c: Context) => {
-  const newUser = await c.req.json();
-  console.log(newUser);
-  users.push(newUser);
-  return c.json(newUser, 201);
-};
-
-// update users
-export const updateUsers = async (c: Context) => {
-  const id = c.req.param("id");
-  const updatedUser = await c.req.json();
-  const index = users.findIndex((user) => user.id === parseInt(id, 10));
-  if (index === -1) {
-    return c.json({ error: "User not found" }, 404);
+export const createUser = async (c: Context) => {
+  try {
+    const user = await c.req.json();
+    console.log(user);
+    const createdUser = await createUserService(user);
+    if (!createdUser) {
+      return c.text("no user created");
+    }
+    return c.json({ msg: createdUser }, 201);
+  } catch (error: any) {
+    return c.json({ error: error?.message }, 400);
   }
-  users[index] = { ...users[index], ...updatedUser };
-  return c.json(users[index], 200);
 };
 
-// using type context(when you receive data)
+export const updateUser = async (c: Context) => {
+  const id = parseInt(c.req.param("id"));
+  if (isNaN(id)) return c.text("Invalid ID", 400);
+
+  const user = await c.req.json();
+  try {
+    // search for the user
+    const searchedUser = await getUserService(id);
+    if (searchedUser == undefined) return c.text("User not found", 404);
+    // get the data and update it
+    const res = await updateUserService(id, user);
+    // return a success message
+    if (!res) return c.text("User not updated", 404);
+
+    return c.json({ msg: res }, 201);
+  } catch (error: any) {
+    return c.json({ error: error?.message }, 400);
+  }
+};
+
+//delete user
+export const deleteUser = async (c: Context) => {
+  const id = Number(c.req.param("id"));
+  if (isNaN(id)) return c.text("Invalid ID", 400);
+
+  try {
+    //search for the user
+    const user = await getUserService(id);
+    if (user == undefined) return c.text("User not found", 404);
+    //deleting the user
+    const res = await deleteUserService(id);
+    if (!res) return c.text("User not deleted", 404);
+
+    return c.json({ msg: res }, 201);
+  } catch (error: any) {
+    return c.json({ error: error?.message }, 400);
+  }
+};
+

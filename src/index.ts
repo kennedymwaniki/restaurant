@@ -2,6 +2,8 @@ import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import "dotenv/config";
 import { userRouter } from "./users/usersRouter";
+import { cityRouter } from "./city/cityRouter";
+import { stateRouter } from "./state/stateRouter";
 
 const app = new Hono().basePath("/api");
 
@@ -14,6 +16,8 @@ app.get("/news", (c) => {
 });
 
 app.route("/", userRouter);
+app.route("/", cityRouter);
+app.route("/", stateRouter);
 // example
 
 const port = 3000;
