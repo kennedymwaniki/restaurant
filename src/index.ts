@@ -4,6 +4,7 @@ import "dotenv/config";
 import { userRouter } from "./users/usersRouter";
 import { cityRouter } from "./city/cityRouter";
 import { stateRouter } from "./state/stateRouter";
+import { addressRouter } from "./address/addressRouter";
 
 const app = new Hono().basePath("/api");
 
@@ -18,6 +19,7 @@ app.get("/news", (c) => {
 app.route("/", userRouter);
 app.route("/", cityRouter);
 app.route("/", stateRouter);
+app.route("/", addressRouter);
 
 // example
 

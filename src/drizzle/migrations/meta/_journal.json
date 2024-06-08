@@ -5,22 +5,36 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1717641515807,
-      "tag": "0000_past_retro_girl",
+      "when": 1717835316848,
+      "tag": "0000_elite_captain_america",
       "breakpoints": true
     },
     {
       "idx": 1,
       "version": "7",
-      "when": 1717695085830,
-      "tag": "0001_opposite_molecule_man",
+      "when": 1717846611820,
+      "tag": "0001_fat_major_mapleleaf",
       "breakpoints": true
     },
     {
       "idx": 2,
       "version": "7",
-      "when": 1717696895546,
-      "tag": "0002_daffy_hulk",
+      "when": 1717846948286,
+      "tag": "0002_zippy_lionheart",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1717847593457,
+      "tag": "0003_wealthy_human_torch",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1717850315197,
+      "tag": "0004_common_stone_men",
       "breakpoints": true
     }
   ]

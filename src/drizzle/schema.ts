@@ -7,8 +7,9 @@ import {
   varchar,
   boolean,
   date,
+  timestamp,
 } from "drizzle-orm/pg-core";
-
+import { sql } from "drizzle-orm"; // Import the sql template tag used to write raw SQL queries
 import { relations } from "drizzle-orm";
 
 // Tables
@@ -22,8 +23,12 @@ export const menuItemTable = pgTable("menu_item", {
   ingredients: varchar("ingredients", { length: 256 }),
   price: varchar("price", { length: 256 }),
   active: boolean("active"),
-  created_at: date("created_at"),
-  updated_at: date("updated_at"),
+  created_at: timestamp("created_at")
+    .default(sql`NOW()`)
+    .notNull(),
+  updated_at: timestamp("updated_at")
+    .default(sql`NOW()`)
+    .notNull(),
 });
 
 export const cityTable = pgTable("city", {
@@ -46,10 +51,18 @@ export const addressTable = pgTable("address", {
   street_address_2: varchar("street_address_2", { length: 256 }),
   zip_code: varchar("zip_code", { length: 10 }),
   delivery_instructions: varchar("delivery_instructions", { length: 256 }),
-  user_id: integer("user_id").references(() => usersTable.id),
-  city_id: integer("city_id").references(() => cityTable.id),
-  created_at: date("created_at"),
-  updated_at: date("updated_at"),
+  user_id: integer("user_id").references(() => usersTable.id, {
+    onDelete: "cascade",
+  }),
+  city_id: integer("city_id").references(() => cityTable.id, {
+    onDelete: "cascade",
+  }),
+  created_at: timestamp("created_at")
+    .default(sql`NOW()`)
+    .notNull(),
+  updated_at: timestamp("updated_at")
+    .default(sql`NOW()`)
+    .notNull(),
 });
 
 export const categoryTable = pgTable("category", {
@@ -59,13 +72,21 @@ export const categoryTable = pgTable("category", {
 
 export const commentTable = pgTable("comments", {
   id: serial("id").primaryKey(),
-  order_id: integer("order_id").references(() => ordersTable.id),
-  user_id: integer("user_id").references(() => usersTable.id),
+  order_id: integer("order_id").references(() => ordersTable.id, {
+    onDelete: "cascade",
+  }),
+  user_id: integer("user_id").references(() => usersTable.id, {
+    onDelete: "cascade",
+  }),
   comment_text: varchar("comment_text", { length: 256 }),
   is_complaint: boolean("is_complaint"),
   is_praise: boolean("is_praise"),
-  created_at: date("created_at"),
-  updated_at: date("updated_at"),
+  created_at: timestamp("created_at")
+    .default(sql`NOW()`)
+    .notNull(),
+  updated_at: timestamp("updated_at")
+    .default(sql`NOW()`)
+    .notNull(),
 });
 
 export const driversTable = pgTable("driver", {
@@ -73,58 +94,89 @@ export const driversTable = pgTable("driver", {
   car_make: varchar("car_make", { length: 256 }),
   car_model: varchar("car_model", { length: 256 }),
   car_year: integer("car_year"),
-  user_id: integer("user_id").references(() => usersTable.id),
+  user_id: integer("user_id").references(() => usersTable.id, {
+    onDelete: "cascade",
+  }),
   online: boolean("online"),
   delivering: boolean("delivering"),
-  created_at: date("created_at"),
-  updated_at: date("updated_at"),
+  created_at: timestamp("created_at")
+    .default(sql`NOW()`)
+    .notNull(),
+  updated_at: timestamp("updated_at")
+    .default(sql`NOW()`)
+    .notNull(),
 });
 
 export const orderMenuItemTable = pgTable("order_menu_item", {
   id: serial("id").primaryKey(),
-  order_id: integer("order_id").references(() => ordersTable.id),
-  menu_item_id: integer("menu_item_id").references(() => menuItemTable.id),
+  order_id: integer("order_id").references(() => ordersTable.id, {
+    onDelete: "cascade",
+  }),
+  menu_item_id: integer("menu_item_id").references(() => menuItemTable.id, {
+    onDelete: "cascade",
+  }),
   quantity: integer("quantity"),
   item_price: integer("item_price"),
   price: integer("price"),
-  comment: date("comment"),
+  comment: varchar("comment"),
 });
 
 export const orderStatusTable = pgTable("order_status", {
   id: serial("id").primaryKey(),
-  order_id: integer("order_id").references(() => ordersTable.id),
-  status_catalog_id: integer("status_catalog_id").references(
-    () => statusCatalogueTable.id
-  ),
-  created_at: varchar("created_at", { length: 256 }),
+  order_id: integer("order_id")
+    .notNull()
+    .references(() => ordersTable.id, { onDelete: "cascade" }),
+  status_catalog_id: integer("status_catalog_id")
+    .notNull()
+    .references(() => statusCatalogueTable.id, { onDelete: "cascade" }),
+  created_at: timestamp("created_at")
+    .default(sql`NOW()`)
+    .notNull(),
 });
 
 export const ordersTable = pgTable("orders", {
   id: serial("id").primaryKey(),
-  restaurant_id: integer("restaurant_id").references(() => restaurantTable.id),
+  restaurant_id: integer("restaurant_id").references(() => restaurantTable.id, {
+    onDelete: "cascade",
+  }),
   estimated_delivery_time: varchar("estimated_delivery_time", { length: 256 }),
   actual_delivery_time: varchar("actual_delivery_time", { length: 256 }),
   delivery_address_id: integer("delivery_address_id").references(
-    () => addressTable.id
+    () => addressTable.id,
+    { onDelete: "cascade" }
   ),
-  user_id: integer("user_id").references(() => usersTable.id),
-  driver_id: integer("driver_id").references(() => driversTable.id),
+  user_id: integer("user_id").references(() => usersTable.id, {
+    onDelete: "cascade",
+  }),
+  driver_id: integer("driver_id").references(() => driversTable.id, {
+    onDelete: "cascade",
+  }),
   price: varchar("price", { length: 256 }),
   discount: varchar("discount", { length: 256 }),
   final_price: varchar("final_price", { length: 256 }),
   comment: varchar("comment", { length: 256 }),
-  created_at: date("created_at"),
-  updated_at: date("updated_at"),
+  created_at: timestamp("created_at")
+    .default(sql`NOW()`)
+    .notNull(),
+  updated_at: timestamp("updated_at")
+    .default(sql`NOW()`)
+    .notNull(),
 });
 
-export const restaurantTable = pgTable("restaurantTable", {
+export const restaurantTable = pgTable("restaurant", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 256 }),
   street_address: varchar("street_address", { length: 256 }),
   zip_code: varchar("zip_code", { length: 10 }),
-  city_id: integer("city_id").references(() => cityTable.id),
-  created_at: date("created_at"),
-  updated_at: date("updated_at"),
+  city_id: integer("city_id").references(() => cityTable.id, {
+    onDelete: "cascade",
+  }),
+  created_at: timestamp("created_at")
+    .default(sql`NOW()`)
+    .notNull(),
+  updated_at: timestamp("updated_at")
+    .default(sql`NOW()`)
+    .notNull(),
 });
 
 export const statusCatalogueTable = pgTable("status_catalog", {
@@ -146,12 +198,28 @@ export const usersTable = pgTable("users", {
 export const restaurantOwnerTable = pgTable("restaurant_owner", {
   id: serial("id").primaryKey(),
   restaurant_id: integer("restaurant_id").references(() => restaurantTable.id),
-  owner_id: integer("owner_id").references(() => usersTable.id),
+  owner_id: integer("owner_id").references(() => usersTable.id, {
+    onDelete: "cascade",
+  }),
 });
 
 //TABLE TYPES
 export type TIUser = typeof usersTable.$inferInsert;
 export type TSUser = typeof usersTable.$inferSelect;
+
+// addressTypes
+export type TIaddress = typeof addressTable.$inferInsert;
+export type TSaddress = typeof addressTable.$inferSelect;
+
+//categoryTypes
+export type TIcategory = typeof categoryTable.$inferInsert;
+export type TScategoty = typeof categoryTable.$inferSelect;
+
+//stateTypes
+export type TIstate = typeof stateTable.$inferInsert;
+export type TSstate = typeof stateTable.$inferSelect;
+
+//order types
 
 // relationships
 

@@ -1,6 +1,6 @@
 {
-  "id": "51d82ea7-2cb5-48f9-b8ac-5e1081cb1c60",
-  "prevId": "1fd152e3-6e6a-4081-b6a1-ed38080c5694",
+  "id": "53072d80-2b96-45ee-9981-8e12e032c4c6",
+  "prevId": "0d6282ed-d42a-4503-87e4-007768e7025c",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -52,15 +52,17 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "date",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "NOW()"
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "date",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "NOW()"
         }
       },
       "indexes": {},
@@ -75,7 +77,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "address_city_id_city_id_fk": {
@@ -88,7 +90,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -224,7 +226,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "comments_user_id_users_id_fk": {
@@ -237,7 +239,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -292,15 +294,17 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "date",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "NOW()"
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "date",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "NOW()"
         }
       },
       "indexes": {},
@@ -315,7 +319,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -376,23 +380,25 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "date",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "NOW()"
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "date",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "NOW()"
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "menu_item_restaurant_id_restaurantTable_id_fk": {
-          "name": "menu_item_restaurant_id_restaurantTable_id_fk",
+        "menu_item_restaurant_id_restaurant_id_fk": {
+          "name": "menu_item_restaurant_id_restaurant_id_fk",
           "tableFrom": "menu_item",
-          "tableTo": "restaurantTable",
+          "tableTo": "restaurant",
           "columnsFrom": [
             "restaurant_id"
           ],
@@ -461,7 +467,7 @@
         },
         "comment": {
           "name": "comment",
-          "type": "date",
+          "type": "varchar",
           "primaryKey": false,
           "notNull": false
         }
@@ -478,7 +484,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "order_menu_item_menu_item_id_menu_item_id_fk": {
@@ -491,7 +497,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -519,12 +525,6 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": false
         }
       },
       "indexes": {},
@@ -539,7 +539,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "order_status_status_catalog_id_status_catalog_id_fk": {
@@ -631,30 +631,32 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "date",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "NOW()"
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "date",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "NOW()"
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "orders_restaurant_id_restaurantTable_id_fk": {
-          "name": "orders_restaurant_id_restaurantTable_id_fk",
+        "orders_restaurant_id_restaurant_id_fk": {
+          "name": "orders_restaurant_id_restaurant_id_fk",
           "tableFrom": "orders",
-          "tableTo": "restaurantTable",
+          "tableTo": "restaurant",
           "columnsFrom": [
             "restaurant_id"
           ],
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "orders_delivery_address_id_address_id_fk": {
@@ -667,7 +669,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "orders_user_id_users_id_fk": {
@@ -680,7 +682,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "orders_driver_id_driver_id_fk": {
@@ -693,7 +695,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -725,10 +727,10 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "restaurant_owner_restaurant_id_restaurantTable_id_fk": {
-          "name": "restaurant_owner_restaurant_id_restaurantTable_id_fk",
+        "restaurant_owner_restaurant_id_restaurant_id_fk": {
+          "name": "restaurant_owner_restaurant_id_restaurant_id_fk",
           "tableFrom": "restaurant_owner",
-          "tableTo": "restaurantTable",
+          "tableTo": "restaurant",
           "columnsFrom": [
             "restaurant_id"
           ],
@@ -748,15 +750,15 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "public.restaurantTable": {
-      "name": "restaurantTable",
+    "public.restaurant": {
+      "name": "restaurant",
       "schema": "",
       "columns": {
         "id": {
@@ -791,22 +793,24 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "date",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "NOW()"
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "date",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "NOW()"
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "restaurantTable_city_id_city_id_fk": {
-          "name": "restaurantTable_city_id_city_id_fk",
-          "tableFrom": "restaurantTable",
+        "restaurant_city_id_city_id_fk": {
+          "name": "restaurant_city_id_city_id_fk",
+          "tableFrom": "restaurant",
           "tableTo": "city",
           "columnsFrom": [
             "city_id"
@@ -814,7 +818,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },

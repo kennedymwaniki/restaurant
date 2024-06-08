@@ -1,6 +1,6 @@
 {
-  "id": "053b6478-b51d-4510-b523-59d8e4576bc2",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "50458ffe-8de7-445c-be3b-028998fe25fe",
+  "prevId": "53072d80-2b96-45ee-9981-8e12e032c4c6",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -380,15 +380,17 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "date",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "NOW()"
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "date",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "NOW()"
         }
       },
       "indexes": {},
@@ -465,7 +467,7 @@
         },
         "comment": {
           "name": "comment",
-          "type": "date",
+          "type": "varchar",
           "primaryKey": false,
           "notNull": false
         }
@@ -516,13 +518,20 @@
           "name": "order_id",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "status_catalog_id": {
           "name": "status_catalog_id",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "NOW()"
         }
       },
       "indexes": {},
@@ -550,7 +559,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
