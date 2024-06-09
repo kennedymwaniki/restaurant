@@ -1,4 +1,4 @@
-import { addressTable, TIaddress,  TSaddress } from "../drizzle/schema";
+import { addressTable, TIaddress, TSaddress } from "../drizzle/schema";
 import db from "../drizzle/db";
 
 import { eq } from "drizzle-orm";

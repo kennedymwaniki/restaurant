@@ -11,7 +11,7 @@ export const stateRouter = new Hono();
 
 // get users route
 stateRouter.get("/state", listState);
+stateRouter.get("/state/:id", getState);
 stateRouter.post("/state", createState);
 stateRouter.delete("/state/:id", deleteState);
-stateRouter.get("/state/:id", getState);
 stateRouter.put("/state/:id", updateState);

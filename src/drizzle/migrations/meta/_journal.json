@@ -36,6 +36,20 @@
       "when": 1717850315197,
       "tag": "0004_common_stone_men",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1717875267504,
+      "tag": "0005_clumsy_epoch",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1717875363737,
+      "tag": "0006_fresh_junta",
+      "breakpoints": true
     }
   ]
 }

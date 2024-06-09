@@ -17,8 +17,12 @@ import { relations } from "drizzle-orm";
 export const menuItemTable = pgTable("menu_item", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 256 }),
-  restaurant_id: integer("restaurant_id").references(() => restaurantTable.id),
-  category_id: integer("category_id").references(() => categoryTable.id),
+  restaurant_id: integer("restaurant_id").references(() => restaurantTable.id, {
+    onDelete: "cascade",
+  }),
+  category_id: integer("category_id").references(() => categoryTable.id, {
+    onDelete: "cascade",
+  }),
   description: varchar("description", { length: 256 }),
   ingredients: varchar("ingredients", { length: 256 }),
   price: varchar("price", { length: 256 }),
@@ -197,13 +201,16 @@ export const usersTable = pgTable("users", {
 
 export const restaurantOwnerTable = pgTable("restaurant_owner", {
   id: serial("id").primaryKey(),
-  restaurant_id: integer("restaurant_id").references(() => restaurantTable.id),
+  restaurant_id: integer("restaurant_id").references(() => restaurantTable.id, {
+    onDelete: "cascade",
+  }),
   owner_id: integer("owner_id").references(() => usersTable.id, {
     onDelete: "cascade",
   }),
 });
 
 //TABLE TYPES
+//user types
 export type TIUser = typeof usersTable.$inferInsert;
 export type TSUser = typeof usersTable.$inferSelect;
 
@@ -213,13 +220,49 @@ export type TSaddress = typeof addressTable.$inferSelect;
 
 //categoryTypes
 export type TIcategory = typeof categoryTable.$inferInsert;
-export type TScategoty = typeof categoryTable.$inferSelect;
+export type TScategory = typeof categoryTable.$inferSelect;
 
 //stateTypes
 export type TIstate = typeof stateTable.$inferInsert;
 export type TSstate = typeof stateTable.$inferSelect;
 
 //order types
+export type TIorder = typeof ordersTable.$inferInsert;
+export type TSorder = typeof ordersTable.$inferSelect;
+
+//city types
+export type TIcity = typeof cityTable.$inferInsert;
+export type TScity = typeof cityTable.$inferSelect;
+
+//menu Item types
+export type TImenu = typeof menuItemTable.$inferInsert;
+export type TSmenu = typeof menuItemTable.$inferSelect;
+
+//restaurant Item types
+export type TIrestaurant = typeof restaurantTable.$inferInsert;
+export type TSrestaurant = typeof restaurantTable.$inferSelect;
+
+//restaurant Item types
+export type TIcomments = typeof commentTable.$inferInsert;
+export type TScomments = typeof commentTable.$inferSelect;
+
+//restaurant Item types
+export type TIdriver = typeof driversTable.$inferInsert;
+export type TSdriver = typeof driversTable.$inferSelect;
+
+//order Item types
+export type TIorders = typeof ordersTable.$inferInsert;
+export type TSorders = typeof ordersTable.$inferSelect;
+
+//order Item types
+export type TIorderMenu = typeof orderMenuItemTable.$inferInsert;
+export type TSorderMenu = typeof orderMenuItemTable.$inferSelect;
+
+//order Item types
+export type TIorderstatus = typeof orderStatusTable.$inferInsert;
+export type TSorderstatus = typeof orderStatusTable.$inferSelect;
+
+
 
 // relationships
 
