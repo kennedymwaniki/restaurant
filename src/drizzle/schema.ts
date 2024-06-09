@@ -214,6 +214,9 @@ export const restaurantOwnerTable = pgTable("restaurant_owner", {
 export type TIUser = typeof usersTable.$inferInsert;
 export type TSUser = typeof usersTable.$inferSelect;
 
+// export type TIdriver = typeof driversTable.$inferInsert;
+// export type TSdriver = typeof driversTable.$inferSelect;
+
 // addressTypes
 export type TIaddress = typeof addressTable.$inferInsert;
 export type TSaddress = typeof addressTable.$inferSelect;
@@ -246,7 +249,7 @@ export type TSrestaurant = typeof restaurantTable.$inferSelect;
 export type TIcomments = typeof commentTable.$inferInsert;
 export type TScomments = typeof commentTable.$inferSelect;
 
-//restaurant Item types
+//driver Item types
 export type TIdriver = typeof driversTable.$inferInsert;
 export type TSdriver = typeof driversTable.$inferSelect;
 
@@ -262,7 +265,13 @@ export type TSorderMenu = typeof orderMenuItemTable.$inferSelect;
 export type TIorderstatus = typeof orderStatusTable.$inferInsert;
 export type TSorderstatus = typeof orderStatusTable.$inferSelect;
 
+//restaurantOwners
+export type TIowner = typeof restaurantOwnerTable.$inferInsert;
+export type TSowner = typeof restaurantOwnerTable.$inferSelect;
 
+//restaurantOwners
+export type TIstatusCatalogue = typeof statusCatalogueTable.$inferInsert;
+export type TSstatusCatalogue = typeof statusCatalogueTable.$inferSelect;
 
 // relationships
 

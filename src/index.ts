@@ -12,6 +12,8 @@ import { commentRouter } from "./comments/commentRouter";
 import { driverRouter } from "./driver/driverRouter";
 import { orderRouter } from "./orders/orderRouter";
 import { orderMenuItemRouter } from "./order_menu_item/orderMenuRouter";
+import { ownerRouter } from "./restaurant_owner/restaurantOwnerRouter";
+import { catalogueRouter } from "./statusCatalogue/statusCatalogueRouter";
 
 const app = new Hono().basePath("/api");
 
@@ -34,6 +36,8 @@ app.route("/", commentRouter);
 app.route("/", driverRouter);
 app.route("/", orderRouter);
 app.route("/", orderMenuItemRouter);
+app.route("/", ownerRouter);
+app.route("/", catalogueRouter);
 
 // example
 

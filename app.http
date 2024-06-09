@@ -254,4 +254,26 @@ DELETE http://localhost:8000/api/orders/2
 
 ///order menu Items
 ###
-GET http://localhost:8000/api/ordermenu/9
+GET http://localhost:8000/api/ordermenu
+
+
+
+
+///ownerTable
+###
+GET http://localhost:8000/api/owner
+
+###
+GET http://localhost:8000/api/owner/3
+###
+DELETE  http://localhost:8000/api/owner/4
+
+
+///
+###
+GET http://localhost:8000/api/catalogue
+
+###
+GET http://localhost:8000/api/catalogue/3
+
+
