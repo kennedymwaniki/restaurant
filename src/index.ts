@@ -37,7 +37,7 @@ app.route("/", driverRouter);
 app.route("/", orderRouter);
 app.route("/", orderMenuItemRouter);
 app.route("/", ownerRouter);
-app.route("/", catalogueRouter);
+app.route("/", catalogueRouter );
 
 // example
 
